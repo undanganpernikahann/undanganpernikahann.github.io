@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Demo Bot Form</title>
+</head>
+
+<body>
+
+    <form>
+        <input type="text" id="nama" placeholder="Nama" />
+        <input type="text" id="email" placeholder="Email" />
+        <input type="text" id="pesan" placeholder="Pesan" />
+        <input type="button" id="kirim" value="KIRIM" onclick="kirimPesan()" />
+    </form>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="main.js"></script>
+
+</html>
+function kirimPesan() {
+
+    var nama = document.getElementById('nama');
+    var email = document.getElementById('email');
+    var pesan = document.getElementById('pesan');
+
+    var gabungan = 'Nama%3A%0A' + nama.value + '%0AEmail%3A%0A' + email.value + '%0APesan%3A%0A' + pesan.value;
+
+    var token = 'TOKEN_BOT_KAMU'; // Ganti dengan token bot yang kamu buat
+    var grup = 'CHAT_ID_GRUP_KAMU'; // Ganti dengan chat id dari bot yang kamu buat
+
+    $.ajax({
+        url: `https://api.telegram.org/bot${token}/sendMessage?chat_id=${grup}&text=${gabungan}&parse_mode=html`,
+        method: `POST`,
+    })
+}
+body {
+    background: #1b1b1b;
+    color: #cecece;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    width: 300px;
+    height: fit-content;
+    display: block;
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 200px;
+    outline: none;
+    padding: 7px 5px 7px 5px;
+    border: 2px solid #cecece;
+    background: none;
+    margin: 5px;
+    border-radius: 5px;
+    color: #cecece;
+    text-align: center;
+}
+
+input[type="text"]:focus {
+    border: 2px solid cyan;
+    outline: none;
+    text-align: center;
+}
+
+input[type="button"] {
+    width: 215px;
+    padding: 7px 5px 7px 5px;
+    background: #0084ff;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+}
